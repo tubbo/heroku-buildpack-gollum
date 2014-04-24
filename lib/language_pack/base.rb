@@ -15,6 +15,7 @@ class LanguagePack::Base
   include LanguagePack::ShellHelpers
 
   VENDOR_URL = ENV['BUILDPACK_VENDOR_URL'] || "https://s3-external-1.amazonaws.com/heroku-buildpack-ruby"
+  ICU4C_URL = 'https://s3.amazonaws.com/frederick-heroku-binaries/icu4c-52.1.0.tar.gz'
 
   attr_reader :build_path, :cache
 
