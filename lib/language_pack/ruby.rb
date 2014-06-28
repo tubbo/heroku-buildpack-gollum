@@ -12,7 +12,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   NAME                 = "ruby"
   LIBYAML_VERSION      = "0.1.6"
   LIBYAML_PATH         = "libyaml-#{LIBYAML_VERSION}"
-  BUNDLER_VERSION      = "1.5.2"
+  BUNDLER_VERSION      = "1.6.3"
   BUNDLER_GEM_PATH     = "bundler-#{BUNDLER_VERSION}"
   NODE_VERSION         = "0.4.7"
   NODE_JS_BINARY_PATH  = "node-#{NODE_VERSION}"
@@ -59,7 +59,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   def default_config_vars
     instrument "ruby.default_config_vars" do
       vars = {
-        "LANG"     => "en_US.UTF-8",
+        "LANG" => env("LANG") || "en_US.UTF-8"
       }
 
       ruby_version.jruby? ? vars.merge({
@@ -177,7 +177,7 @@ private
       last_version      = nil
       last_version      = @metadata.read(last_version_file).chomp if @metadata.exists?(last_version_file)
 
-      @ruby_version = LanguagePack::RubyVersion.new(bundler,
+      @ruby_version = LanguagePack::RubyVersion.new(bundler.ruby_version,
         is_new:       new_app,
         last_version: last_version)
       return @ruby_version
@@ -433,7 +433,7 @@ WARNING
   # loads a default bundler cache for new apps to speed up initial bundle installs
   def load_default_cache
     instrument "ruby.load_default_cache" do
-      if load_default_cache?
+      if false # load_default_cache?
         puts "New app detected loading default bundler cache"
         patchlevel = run("ruby -e 'puts RUBY_PATCHLEVEL'").chomp
         cache_name  = "#{DEFAULT_RUBY_VERSION}-p#{patchlevel}-default-cache"
