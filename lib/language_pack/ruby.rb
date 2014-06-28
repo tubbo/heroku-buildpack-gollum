@@ -518,7 +518,7 @@ WARNING
           env_vars       = {
             "BUNDLE_GEMFILE"                => "#{pwd}/Gemfile",
             "BUNDLE_CONFIG"                 => "#{pwd}/.bundle/config",
-            "BUNDLE_BUILD__CHARLOCK_HOLMES" => "--with-icu-dir=#{pwd}/vendor/#{ICU4C_VENDOR_PATH}",
+            "BUNDLE_BUILD__CHARLOCK_HOLMES" => "--with-icu-dir=#{pwd}/vendor/#{ICU4C_VENDOR_PATH} --with-icu-lib=#{pwd}/vendor/#{ICU4C_VENDOR_PATH}/lib --with-icu-include=#{pwd}/vendor/#{ICU4C_VENDOR_PATH}/include",
             "CPATH"                         => noshellescape("#{yaml_include}:$CPATH"),
             "CPPATH"                        => noshellescape("#{yaml_include}:$CPPATH"),
             "LIBRARY_PATH"                  => noshellescape("#{yaml_lib}:$LIBRARY_PATH"),
